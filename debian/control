@@ -1,0 +1,25 @@
+Source: graphite-ch
+Section: misc
+Priority: extra
+Maintainer: Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>
+Build-Depends: debhelper (>= 8.0.0), cdbs
+Standards-Version: 3.9.3
+Homepage: https://github.com/dkulikovsky/graphite-ch-web
+Package: graphite-ch
+Architecture: all
+Depends: python-cairo, 
+ python-tz, 
+ python-pyparsing, 
+ python-django-1.4 | python-django (>= 1.4) | python-django-1.6, 
+ python-django-tagging, 
+ python-mysqldb, 
+ mysql-server | virtual-mysql-server | percona-xtradb-cluster-server-5.6, 
+ python-flup,
+ python-django-yauth, 
+ python-httplib2, 
+ python-memcached,
+ python-pylibmc,
+ python-django-replicated,
+ python-requests
+Description: graph system uses clickhouse
+ New graph system uses clickhouse

@@ -1,0 +1,319 @@
+graphite-ch (0.1.14.8) unstable; urgency=medium
+
+  * fixed bug in standard find, for compat with other find changes 
+  * fixed get_intervals bug in remote_storage.py
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Tue, 02 Feb 2016 11:40:25 +0300
+
+graphite-ch (0.1.14.7) unstable; urgency=medium
+
+  * yabs-ceres remover from deplist 
+
+ -- Anna Sysoeva <antrue@yandex-team.ru>  Thu, 28 Jan 2016 16:23:14 +0300
+
+graphite-ch (0.1.14.6) unstable; urgency=medium
+
+  * fixed step bug in clickhouse module 
+  * changed match to search in retention pattern scan 
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Wed, 13 Jan 2016 14:07:14 +0300
+
+graphite-ch (0.1.14.5) precise; urgency=low
+
+  * fixed empty legend render bug
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Fri, 27 Nov 2015 17:25:16 +0300
+
+graphite-ch (0.1.14.4) unstable; urgency=low
+
+  * fixed clickhouse error handling in fetch 
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Fri, 27 Nov 2015 17:00:44 +0300
+
+graphite-ch (0.1.14.3) unstable; urgency=low
+
+  * merged timeout on render and master-stable patches 
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Fri, 27 Nov 2015 15:33:12 +0300
+
+graphite-ch (0.1.14.1) unstable; urgency=low
+
+  * now if graphite can't fetch any datapoints, it will return Nan's
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Fri, 13 Nov 2015 20:02:44 +0300
+
+graphite-ch (0.1.14) unstable; urgency=low
+
+  * added timeout on render 
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Thu, 17 Sep 2015 12:30:24 +0300
+
+graphite-ch (0.1.13.3) unstable; urgency=low
+
+  * backport for patch "Remove superfluous grid line for log scale"
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Fri, 13 Nov 2015 19:57:25 +0300
+
+graphite-ch (0.1.13.2) unstable; urgency=low
+
+  * fixed No Data handling 
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Fri, 11 Sep 2015 18:31:31 +0300
+
+graphite-ch (0.1.13.1) unstable; urgency=low
+
+  * added query optimization 
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Fri, 11 Sep 2015 17:28:55 +0300
+
+graphite-ch (0.1.12.1) unstable; urgency=low
+
+  * one more fix for conductor groups with single host 
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Fri, 28 Aug 2015 16:31:04 +0300
+
+graphite-ch (0.1.12) unstable; urgency=low
+
+  * merged patches:
+  *  - one-host groups fix  
+  *  - Fix empty metrics & fix crush saved cache 
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Wed, 26 Aug 2015 15:02:22 +0300
+
+graphite-ch (0.1.11) unstable; urgency=low
+
+  * fixed empty metrics fetch
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Mon, 13 Jul 2015 18:53:53 +0300
+
+graphite-ch (0.1.10.5) unstable; urgency=low
+
+  * fixed tree encode bug 
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Mon, 15 Jun 2015 12:15:38 +0300
+
+graphite-ch (0.1.10.4) unstable; urgency=medium
+
+  * add buttons 
+
+ -- Anna Sysoeva <antrue@yandex-team.ru>  Fri, 10 Apr 2015 19:53:04 +0300
+
+graphite-ch (0.1.10.3) unstable; urgency=medium
+
+  * added map, reduce render functions 
+
+ -- Anna Sysoeva <antrue@yandex-team.ru>  Fri, 10 Apr 2015 19:05:34 +0300
+
+graphite-ch (0.1.10.2) unstable; urgency=low
+
+  * fixed cache for conductor api
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Thu, 19 Mar 2015 15:44:33 +0300
+
+graphite-ch (0.1.10.1) unstable; urgency=low
+
+  * fixed post body output 
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Tue, 17 Mar 2015 19:10:08 +0300
+
+graphite-ch (0.1.10.0) unstable; urgency=low
+
+  * fixed graphlot 
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Mon, 02 Mar 2015 19:27:37 +0300
+
+graphite-ch (0.1.9.8) unstable; urgency=low
+
+  * restored useCache option  
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Mon, 02 Mar 2015 19:15:28 +0300
+
+graphite-ch (0.1.9.7) unstable; urgency=low
+
+  * fixed request_body typo 
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Mon, 02 Mar 2015 18:29:02 +0300
+
+graphite-ch (0.1.9.6) unstable; urgency=low
+
+  * moved request body to the right place
+  * added start_time and end_time to log 
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Mon, 02 Mar 2015 16:24:45 +0300
+
+graphite-ch (0.1.9.5) unstable; urgency=low
+
+  * added request body to log 
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Fri, 27 Feb 2015 14:30:38 +0300
+
+graphite-ch (0.1.9.4) unstable; urgency=low
+
+  * added log dir creation in init script 
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Thu, 26 Feb 2015 15:54:58 +0300
+
+graphite-ch (0.1.9.3) unstable; urgency=low
+
+  * added cgroup expander  
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Tue, 24 Feb 2015 13:30:08 +0300
+
+graphite-ch (0.1.9.2) unstable; urgency=low
+
+  * added sortByNameR reversed 
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Fri, 20 Feb 2015 16:06:18 +0300
+
+graphite-ch (0.1.9.1) unstable; urgency=low
+
+  * added request keys 
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Thu, 12 Feb 2015 23:06:56 +0300
+
+graphite-ch (0.1.9.0) unstable; urgency=low
+
+  * optimization for multi queries 
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Wed, 11 Feb 2015 16:49:50 +0300
+
+graphite-ch (0.1.8.1) unstable; urgency=low
+
+  * fixed sql 
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Mon, 02 Feb 2015 19:42:35 +0300
+
+graphite-ch (0.1.8.0) unstable; urgency=low
+
+  * added dedublication code 
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Mon, 02 Feb 2015 18:25:55 +0300
+
+graphite-ch (0.1.7.4) unstable; urgency=low
+
+  * changed http to https in debug template
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Tue, 20 Jan 2015 15:41:15 +0300
+
+graphite-ch (0.1.7.3) unstable; urgency=low
+
+  * removed unused deps 
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Tue, 30 Dec 2014 14:56:48 +0300
+
+graphite-ch (0.1.7.2) unstable; urgency=low
+
+  * removed gevent 
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Tue, 23 Dec 2014 19:30:34 +0300
+
+graphite-ch (0.1.7.1) unstable; urgency=low
+
+  * fixed tmp_node_obj bug 
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Tue, 23 Dec 2014 18:25:29 +0300
+
+graphite-ch (0.1.7.0) unstable; urgency=low
+
+  * added internal data caching 
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Tue, 23 Dec 2014 18:08:08 +0300
+
+graphite-ch (0.1.6.0) unstable; urgency=low
+
+  * using gevent for fetching more than one target in graph 
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Mon, 22 Dec 2014 15:01:54 +0300
+
+graphite-ch (0.1.5.7) unstable; urgency=low
+
+  * fixed history template, now /render url is relative, 
+  * fixed debug page - now it takes graphite hosts from settings
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Thu, 18 Dec 2014 17:38:48 +0300
+
+graphite-ch (0.1.5.6) unstable; urgency=low
+
+  * merged with master again 
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Fri, 12 Dec 2014 16:12:47 +0300
+
+graphite-ch (0.1.5.6) unstable; urgency=low
+
+  * added mapSeries reduceSeries functions 
+
+ -- Anna Sysoeva <antrue@yandex-team.ru>  Fri, 10 Apr 2015 18:21:12 +0300
+
+graphite-ch (0.1.5.5) unstable; urgency=low
+
+  * fixed metricsearch config name
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Fri, 12 Dec 2014 14:43:16 +0300
+
+graphite-ch (0.1.5.4) unstable; urgency=medium
+
+  * last fix in clickhouse config 
+
+ -- Anna Sysoeva <antrue@yandex-team.ru>  Thu, 11 Dec 2014 22:04:07 +0300
+
+graphite-ch (0.1.5.3) unstable; urgency=medium
+
+  * request to metricsearch fix 
+
+ -- Anna Sysoeva <antrue@yandex-team.ru>  Thu, 11 Dec 2014 18:17:43 +0300
+
+graphite-ch (0.1.5.2) unstable; urgency=low
+
+  * metricsearch on CLICKHOUSE_SERVER in config
+
+ -- Anna Sysoeva <antrue@yandex-team.ru>  Thu, 11 Dec 2014 15:18:30 +0300
+
+graphite-ch (0.1.5.1) unstable; urgency=low
+
+  * added percona-xtradb-cluster-server-5.6 to deplist
+
+ -- Anna Sysoeva <antrue@yandex-team.ru>  Tue, 09 Dec 2014 19:46:33 +0300
+
+graphite-ch (0.1.5.0) unstable; urgency=low
+
+  * fixed perf_bug
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Tue, 18 Nov 2014 21:36:12 +0300
+
+graphite-ch (0.1.4.1.exp) unstable; urgency=low
+
+  * small fix for multiquery 
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Mon, 06 Oct 2014 15:20:47 +0400
+
+graphite-ch (0.1.4) unstable; urgency=low
+
+  * stable rebuild after mess in git 
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Mon, 06 Oct 2014 15:14:00 +0400
+
+graphite-ch (0.1.3) unstable; urgency=low
+
+  * moved to mstree search 
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Fri, 03 Oct 2014 19:02:59 +0400
+
+graphite-ch (0.1.2) unstable; urgency=low
+
+  * added storage schema handling
+  * added braces
+  * moved to distributed clickhouse table 
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Tue, 30 Sep 2014 15:42:31 +0400
+
+graphite-ch (0.1.1) unstable; urgency=low
+
+  * fixed deps 
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Thu, 11 Sep 2014 17:16:51 +0400
+
+graphite-ch (0.1.0) unstable; urgency=low
+
+  * initial release for graphite based on clickhouse
+
+ -- Kulikovsky Dmitry <dkulikovsky@yandex-team.ru>  Fri, 15 Aug 2014 18:07:08 +0400
