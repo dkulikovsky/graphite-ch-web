@@ -62,10 +62,7 @@ MIDDLEWARE_CLASSES = (
   'django.middleware.gzip.GZipMiddleware',
   'django.contrib.sessions.middleware.SessionMiddleware',
   'django.contrib.messages.middleware.MessageMiddleware',
-  'django_replicated.middleware.ReplicationMiddleware',
 )
-
-DATABASE_ROUTERS = ['django_replicated.ReplicationRouter'] 
 
 ROOT_URLCONF = 'graphite.urls'
 

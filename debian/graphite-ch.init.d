@@ -1,7 +1,7 @@
 #!/bin/bash
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 GRAPHITE_ROOT="/var/lib/graphite"
-GRAPHITE_MANAGE_SCRIPT="/usr/share/pyshared/django/bin/django-admin.py"
+GRAPHITE_MANAGE_SCRIPT="/usr/bin/django-admin"
 DAEMON="/usr/bin/python"
 PID_FILE="/var/run/graphite.pid"
 PYTHONPATH="/var/lib/graphite/webapp"
