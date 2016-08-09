@@ -126,8 +126,27 @@ class ClickHouseReader(object):
 			'start': time.time()
 		}
 
+		result = []
+		binddict = {} # A dictionary to access per-node data in result table without searching.
+		timeInfo = (startTime, endTime, step)
+
+		# First we initialize array with Nones
+		for node in self.nodes:
+			inner = [ None for ts in xrange(startTime, endTime + 1, step) ]
+			binddict[node.path] = inner
+			result.append((
+				node,
+				(
+					timeInfo,
+					inner
+				)
+			))
+
+		profilingTime['init'] = time.time()
+
 		try:
-			request = requests.post("http://%s:8123" % ''.join(getattr(settings, 'CLICKHOUSE_SERVER', ['127.0.0.1'])), query)
+			# With stream=True data will be parsed while being downloaded.
+			request = requests.post("http://%s:8123" % ''.join(getattr(settings, 'CLICKHOUSE_SERVER', ['127.0.0.1'])), query, stream=True)
 			request.raise_for_status()
 		except Exception as e:
 			log.info("Failed to fetch data, got exception:\n %s" % traceback.format_exc())
@@ -136,53 +155,34 @@ class ClickHouseReader(object):
 		profilingTime['fetch'] = time.time()
 		
 		if withPath:
-			offset = 1
+			oldkey = None
+			# Read data in chunks of 128KiB.
+			for line in request.iter_lines(chunk_size=131072):
+				if not line:
+					continue
+				line = line.split('\t')
+				# Records received from database are sortedby path.
+				# That means that only when the path changes it is necessary to perform lookup on binddict.
+				if oldkey != line[0]:
+					oldkey = line[0]
+					bindinner = binddict[line[0]]
+				bindinner[ (int(line[1])-startTime) / step ] = float(line[2])
 		else:
-			offset = 0
-			path   = self.path
-
-		data = {}
-		for line in request.text.split('\n'):
-			line = line.strip()
-			if not line:
-				continue
-
-			line = line.split('\t')
-
-			if withPath:
-				path = line[0].strip()
-			ts    = int(line[offset].strip())
-			value = float(line[offset + 1].strip())
-
-			data.setdefault(path, {})[ts] = value
+			bindinner = binddict[self.path]
+			# Read data in chunks of 128KiB.
+			for line in request.iter_lines(chunk_size=131072):
+				if not line:
+					continue
+				line = line.split('\t')
+				bindinner[ (int(line[0])-startTime) / step ] = float(line[1])
 
 		profilingTime['parse'] = time.time()
 
-		timeInfo = (startTime, endTime, step)
-
-		result = []
-
-		for node in self.nodes:
-			data.setdefault(node.path, {})
-
-			result.append((
-				node,
-				(
-					timeInfo,
-					[
-						data[node.path].get(ts, None)
-							for ts in xrange(startTime, endTime + 1, step)
-					]
-				)
-			))
-
-		profilingTime['convert'] = time.time()
-
-		log.info('DEBUG:clickhouse_time:[%s] fetch = %s, parse = %s, convert = %s' % (
+		log.info('DEBUG:clickhouse_time:[%s] init = %.2f, fetch = %.2f, parse = %.2f' % (
 			self.reqkey,
-			profilingTime['fetch'] - profilingTime['start'],
+			profilingTime['init'] - profilingTime['start'],
+			profilingTime['fetch'] - profilingTime['init'],
 			profilingTime['parse'] - profilingTime['fetch'],
-			profilingTime['convert'] - profilingTime['parse']
 		))
 
 		if self.path:
@@ -257,11 +257,14 @@ class ClickHouseReader(object):
 		else:
 			args['fields'] += 'kvantT, argMax(Value, Timestamp)'
 
+		# Having results sorted by path allows optimized access to returned list.
 		return """SELECT {fields} FROM {table}
 				WHERE {paths}
 				AND kvantT >= {from} AND kvantT <= {until}
 				AND Date >= toDate(toDateTime({from})) AND Date <= toDate(toDateTime({until}))
-				GROUP BY Path, intDiv(toUInt32(Time), {step}) * {step} as kvantT""".format(**args)
+				GROUP BY Path, intDiv(toUInt32(Time), {step}) * {step} as kvantT
+				ORDER BY Path
+				""".format(**args)
 
 import graphite.readers
 graphite.readers.MultiReader = ClickHouseReader
