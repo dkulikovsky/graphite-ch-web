@@ -63,7 +63,7 @@ def get_data(request):
             ) for timeseries in seriesList ]
     if not result:
         raise Http404
-    return HttpResponse(json.dumps(result), mimetype="application/json")
+    return HttpResponse(json.dumps(result), content_type="application/json")
 
 
 def find_metric(request):
@@ -72,11 +72,11 @@ def find_metric(request):
         query = str( request.REQUEST['q'] )
     except:
         return HttpResponseBadRequest(
-            content="Missing required parameter 'q'", mimetype="text/plain")
+            content="Missing required parameter 'q'", content_type="text/plain")
 
     matches = list( STORE.find(query+"*") )
     content = "\n".join([node.path for node in matches ])
-    response = HttpResponse(content, mimetype='text/plain')
+    response = HttpResponse(content, content_type='text/plain')
 
     return response
 
@@ -129,7 +129,7 @@ def search(request):
 
   index_file.close()
   result_string = ','.join(results)
-  return HttpResponse(result_string, mimetype='text/plain')
+  return HttpResponse(result_string, content_type='text/plain')
 
 
 def myGraphLookup(request):
@@ -267,9 +267,9 @@ def json_response(nodes, request=None):
     jsonp = False
   json_data = json.dumps(nodes)
   if jsonp:
-    response = HttpResponse("%s(%s)" % (jsonp, json_data),mimetype="text/javascript")
+    response = HttpResponse("%s(%s)" % (jsonp, json_data),content_type="text/javascript")
   else:
-    response = HttpResponse(json_data,mimetype="application/json")
+    response = HttpResponse(json_data,content_type="application/json")
   response['Pragma'] = 'no-cache'
   response['Cache-Control'] = 'no-cache'
   return response

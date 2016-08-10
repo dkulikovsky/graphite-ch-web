@@ -407,7 +407,7 @@ def create_temporary(request):
 
 
 def json_response(obj):
-  return HttpResponse(mimetype='application/json', content=json.dumps(obj))
+  return HttpResponse(content_type='application/json', content=json.dumps(obj))
 
   
 def user_login(request):
