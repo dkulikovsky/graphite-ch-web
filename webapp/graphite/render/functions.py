@@ -218,6 +218,38 @@ def sumSeriesWithWildcards(requestContext, seriesList, *position): #XXX
 
   return [newSeries[name] for name in newNames]
 
+def multiplySeriesWithWildcards(requestContext, seriesList, *position): #XXX
+  """
+  Call multiplySeries after inserting wildcards at the given position(s).
+
+  Example:
+
+  .. code-block:: none
+
+    &target=multiplySeriesWithWildcards([web.host-[0-7].avg-response.value, web.host-[0-7].total-request.value], 2,3)
+
+  This would be the equivalent of
+  ``target=multiplySeries(web.host-0.avg-response.value, web.host-0.total-request.value)&target=multiplySeries(web.host-1.avg-response.value, web.host-1.total-request.value)...``
+
+  """
+  if type(position) is int:
+    positions = [position]
+  else:
+    positions = position
+
+  newSeries = {}
+  newNames = list()
+
+  for series in seriesList:
+    newname = '.'.join(map(lambda x: x[1], filter(lambda i: i[0] not in positions, enumerate(series.name.split('.')))))
+    if newname in newSeries.keys():
+      newSeries[newname] = multiplySeries(requestContext, (newSeries[newname], series))[0]
+    else:
+      newSeries[newname] = series
+      newNames.append(newname)
+    newSeries[newname].name = newname
+  return [newSeries[name] for name in newNames]
+
 def averageSeriesWithWildcards(requestContext, seriesList, *position): #XXX
   """
   Call averageSeries after inserting wildcards at the given position(s).
@@ -3234,6 +3266,7 @@ SeriesFunctions = {
   'stddevSeries' : stddevSeries,
   'avg' : averageSeries,
   'sumSeriesWithWildcards': sumSeriesWithWildcards,
+  'multiplySeriesWithWildcards': multiplySeriesWithWildcards,
   'averageSeriesWithWildcards': averageSeriesWithWildcards,
   'minSeries' : minSeries,
   'maxSeries' : maxSeries,
